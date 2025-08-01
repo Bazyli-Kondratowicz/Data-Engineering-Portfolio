@@ -15,3 +15,14 @@ Roadmap:
 
 #######################################################################################
 
+##Project 2- Remove headers from CSV Files
+
+At a high level, the program must do the following:
+*Find all the CSV files in the current working directory.
+*Read the full contents of each file.
+*Write the contents, skipping the first line, to a new CSV file.
+
+At the code level, this means the program will need to do the following:
+*Loop over a list of files from os.listdir(), skipping the non-CSV files.
+*Create a CSV reader object and read the contents of the file, using the line_num attribute to *figure out which line to skip.
+*Create a CSV writer object and write the read-in data to the new file.
