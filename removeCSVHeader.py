@@ -1,34 +1,32 @@
+# Removes the header line from csv files
 import csv, os
-from pathlib import Path
 
-for file in os.listdir():
-    if file.endswith('.csv'):
+#create directory for headerless files
+os.makedirs('headerRemoved', exist_ok=True)
 
+#loop through every csv file in cwd
+for file_name in os.listdir('.'):
+    if file_name.endswith('.csv'):
+
+        print(f'Removing headers from {file_name}...')
+
+        csv_rows = []
         #Open input file
-        open_file = open(file)
+        with open(file_name, 'r') as input_file:
+            input_reader = csv.reader(input_file)
+            for row in input_reader:
+                if input_reader.line_num == 1:
+                    continue # skip header row
+                csv_rows.append(row)
 
+        # Ommiting empty files / files with only header
+        if len(csv_rows) > 0:
         #Create new output file
-        output_path = Path('no_headers_' + os.path.basename(file))
-        output_file = open(output_path, 'w', newline='')
-
-        #Read contents
-        file_reader = csv.reader(open_file)
-        data = list(file_reader)
-
-        #If only header or empty
-        if len(data) <= 1:
-            output_file.close()
-            open_file.close()
-            if output_path.exists():
-                os.remove(output_path)
-            continue
-        
-        output_writer = csv.writer(output_file)
-        for row in data[1:]:#skip header
-            output_writer.writerow(row)
-
-        #Closing files
-        output_file.close()
-        open_file.close()
+            with open(os.path.join('headerRemoved', file_name), 'w', newline='') as output_file:
+                csv_writer = csv.writer(output_file)
+                #write rows into new file
+                for row in csv_rows:
+                    csv_writer.writerow(row)
+            
 
                 
