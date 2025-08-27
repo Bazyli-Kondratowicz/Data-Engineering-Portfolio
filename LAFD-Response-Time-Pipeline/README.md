@@ -9,9 +9,9 @@ more informations about file structure (https://data.lacity.org/Public-Safety/LA
 
 ## Features
 - Filters data for 2020 emergency incidents using `Randomized Incident Number`. (This number is generated with the year and quarter indicator with a six digits randomized number attached, i.e. – 201301345785, this number means it is in the year 2013 in the first quarter.)
-- Calculates response times (`On Scene Time - Incident Creation Time`).
-- Loads data into PostgreSQL.
-- Visualizes average response times by PPE level.
+- Calculates response times (`On Scene Time - Incident Creation Time`). TBD
+- Loads data into PostgreSQL. TBD
+- Visualizes average response times by PPE level. TBD
 
 ## Requirements
 - Python 3.8+
@@ -27,8 +27,8 @@ more informations about file structure (https://data.lacity.org/Public-Safety/LA
 6. Run: `python scripts/etl_pipeline.py`
 
 ## Output
-- PostgreSQL table: `lafd.responses`
-- Visualization: `visualizations/response_time_plot.png`
+- PostgreSQL table: 
+- Visualization: `visualizations/TBD .png`
 
 ## License
 CC0 1.0 Universal
