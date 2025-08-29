@@ -9,8 +9,8 @@ more informations about raw file structure (https://data.lacity.org/Public-Safet
 
 ## Features
 - Filters data for 2020 emergency incidents using `Randomized Incident Number`. (This number is generated with the year and quarter indicator with a six digits randomized number attached, i.e. – 201301345785, this number means it is in the year 2013 in the first quarter.)
-- Calculates response times (`On Scene Time - Incident Creation Time`). TBD
-- Loads data into PostgreSQL. TBD
+- Calculates response times (`On Scene Time - Incident Creation Time`).
+- Loads data into PostgreSQL.
 - Visualizes average response times by PPE level. TBD
 
 ## Requirements
@@ -20,10 +20,10 @@ more informations about raw file structure (https://data.lacity.org/Public-Safet
 
 ## Setup
 1. Install PostgreSQL: `brew install postgresql`
-2. Create database: `psql -U postgres -f sql/create_tables.sql`
+2. Create database: `psql -U postgres -f sql/create_table.sql`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Place `lafd_response_metrics.csv` in `data/`.
-5. Update PostgreSQL password in `scripts/etl_pipeline.py`.
+5. Update PostgreSQL password in `pass.env`.
 6. Run: `python scripts/etl_pipeline.py`
 
 ## Output

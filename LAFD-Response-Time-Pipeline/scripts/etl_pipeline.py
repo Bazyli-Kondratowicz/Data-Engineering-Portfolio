@@ -1,5 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
 
 ## Defs
 
@@ -37,12 +39,30 @@ def process_chunk(chunk):
        'Unit_Type', 'PPE_Level', 'year', 'quarter',
        'response_time_minutes']]
     
+def load_to_postgres(df, engine):
+    # check if connection is succesful
+    with engine.connect() as conn:
+        print("Connection successful")
+        # load data into table
+        try:
+            print('Loading...')
+            df.to_sql('responses', engine, if_exists='replace', index=False, method='multi')
+            conn.commit() # explicitly commit
+            print("Data loaded successfully")
+        except Exception as e:
+                conn.rollback() # explicitly rollback
+                print(f"Error loading data: {e}")
+    
 
 ######
 
 def main():
-    #df_test = pd.read_csv('data/LAFD_Response_Metrics_-_Raw_Data.csv', nrows=1000)
     data_path = 'data/LAFD_Response_Metrics_-_Raw_Data.csv'
+
+    # create engine
+    load_dotenv()
+    engine = create_engine(f'postgresql://bkon:{os.getenv('PG_PASSWORD')}!@localhost:5432/postgres')
+
     chunk_size = 100000
     chunks = []
 
@@ -51,22 +71,12 @@ def main():
         if processed_chunk is not None and not processed_chunk.empty:
             chunks.append(processed_chunk)
     
+    # concatenate all chunks into one data frame
     df_filtered = pd.concat(chunks)
+
+    print('Shape of filtered df: ' )
     print(df_filtered.shape)
-    print(df_filtered.head())
 
-    engine = create_engine('postgresql://bkon:ghdT3LJK!@localhost:5432/postgres')
-
-    with engine.connect() as conn:
-        print("Connection successful")
-
-    # print(df_filtered.isnull().sum())
-    print(df_filtered.dtypes)
-
-    try:
-        df_filtered.to_sql('responses', engine, if_exists='replace', index=False, method='multi')
-        print("Data loaded successfully")
-    except Exception as e:
-        print(f"Error loading data: {e}")
+    load_to_postgres(df_filtered, engine)
 
 main()
