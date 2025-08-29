@@ -5,7 +5,7 @@ This project processes the [LAFD Response Metrics - Raw Data](https://catalog.da
 ## About dataset
 The Los Angeles Fire Department (LAFD)’s Computer Aided Dispatch (CAD) system is a transactional, event‐driven system that records dates and time stamps based on events triggered by two distinct human interactions: interaction with CAD at the dispatch center via CAD workstation, and interaction with CAD via the Mobile Data Computer (MDC) installed in the responding LAFD unit, communicating with CAD through the LAFD’s Radio Network Controller (RNC).
 
-more informations about file structure (https://data.lacity.org/Public-Safety/LAFD-Response-Metrics-Raw-Data/n44u-wxe4/about_data)
+more informations about raw file structure (https://data.lacity.org/Public-Safety/LAFD-Response-Metrics-Raw-Data/n44u-wxe4/about_data)
 
 ## Features
 - Filters data for 2020 emergency incidents using `Randomized Incident Number`. (This number is generated with the year and quarter indicator with a six digits randomized number attached, i.e. – 201301345785, this number means it is in the year 2013 in the first quarter.)
